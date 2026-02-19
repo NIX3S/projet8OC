@@ -34,7 +34,10 @@ def test_predict_wrong_type():
     response = client.post("/predict", json=invalid_data)
     assert response.status_code == 422
     json_resp = response.json()
-    assert any("Input should be a valid integer" in msg for msg in json_resp["detail"])
+    assert any(
+    "AMT_INSTALMENT_max" in err["loc"] and "integer" in err["msg"]
+    for err in json_resp["detail"]
+    )
 
 # ----------------------
 # Test endpoint /predict pour erreur interne -> HTTP 500
