@@ -1,0 +1,70 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 5345
+      POSTGRES_DB: scoring_ml
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  api:
+    build: .
+    environment:
+      DB_USER: postgres
+      DB_PASSWORD: 5345
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: scoring_ml
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+    command: >
+      sh -c "python create_db.py &&
+             uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload"
+
+  dashboard:
+    build: .
+    environment:
+      DB_USER: postgres
+      DB_PASSWORD: 5345
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: scoring_ml
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8501:8501"
+    command: >
+      sh -c "streamlit run app/dashboard/performance_dashboard.py --server.port=8501 --server.address=0.0.0.0"
+
+  dashboard_api:
+    build: .
+    environment:
+      DB_USER: postgres
+      DB_PASSWORD: 5345
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: scoring_ml
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8502:8502"  # Port différent pour le deuxième dashboard
+    command: >
+      sh -c "streamlit run app/dashboard/dashboard.py --server.port=8502 --server.address=0.0.0.0"
+
+volumes:
+  pgdata:
