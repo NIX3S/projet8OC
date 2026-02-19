@@ -1,5 +1,3 @@
-# app/monitoring/compute_monitoring_metrics.py
-
 import pandas as pd
 from sqlalchemy.orm import Session
 from create_db import DATABASE_URL, APILogs, MLInput, MLOutput
