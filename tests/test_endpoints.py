@@ -35,10 +35,8 @@ def test_predict_wrong_type():
     assert response.status_code == 422
     json_resp = response.json()
     assert any(
-    isinstance(err, dict) and 
-    "AMT_INSTALMENT_max" in str(err.get("loc", "")) and 
-    "integer" in str(err.get("msg", ""))
-    for err in json_resp["detail"]
+        "AMT_INSTALMENT_max" in msg and "valid number" in msg
+        for msg in json_resp["detail"]
     )
 
 # ----------------------
