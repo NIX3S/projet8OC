@@ -14,37 +14,37 @@ def compute_drift_metrics(reference_csv="data/training_data.csv"):
     drift_score = 0.0
     
     try:
-        # 1. Charger données
+        #Charger données
         reference = pd.read_csv(reference_csv)
         production = pd.read_sql(db.query(MLInput).statement, db.bind)
         
-        print(f"📊 Reference: {len(reference)} lignes | Production: {len(production)} lignes")
+        print(f" Reference: {len(reference)} lignes | Production: {len(production)} lignes")
         
         if len(production) < 5:
-            print("⚠️ Production trop petite → drift=0")
+            print(" Production trop petite → drift=0")
         elif reference.empty:
-            print("⚠️ Reference vide → drift=0")
+            print(" Reference vide → drift=0")
         else:
-            # 2. ✅ FORCER COLONNES IDENTIQUES À 100%
+            #FORCER COLONNES IDENTIQUES À 100%
             common_cols = reference.columns.intersection(production.columns)
-            print(f"🔍 {len(common_cols)} colonnes communes total")
+            print(f" {len(common_cols)} colonnes communes total")
             
-            # 3. Filtrer NUMÉRIQUES dans LES DEUX DataFrames
+            #Filtrer NUMÉRIQUES dans LES DEUX DataFrames
             ref_numeric_cols = reference[common_cols].select_dtypes(include=[np.number]).columns.tolist()
             prod_numeric_cols = production[common_cols].select_dtypes(include=[np.number]).columns.tolist()
             
-            # ✅ INTERSECTION STRICTE = MÊMES COLONNES NUMÉRIQUES
+            # INTERSECTION STRICTE = MÊMES COLONNES NUMÉRIQUES
             numeric_cols = list(set(ref_numeric_cols) & set(prod_numeric_cols))
-            print(f"📈 {len(numeric_cols)} colonnes numériques IDENTIQUES")
+            print(f" {len(numeric_cols)} colonnes numériques IDENTIQUES")
             
             if numeric_cols:
-                # 4. ✅ SÉLECTION SYNCHRONE (même ordre)
+                # SÉLECTION SYNCHRONE (même ordre)
                 ref_data = reference[numeric_cols]
                 cur_data = production[numeric_cols]
                 
-                print(f"✅ Shapes OK: ref={ref_data.shape} | cur={cur_data.shape}")
+                print(f" Shapes OK: ref={ref_data.shape} | cur={cur_data.shape}")
                 
-                # 5. Vérification variance (seuil doux pour 8 lignes)
+                #Vérification variance (seuil doux pour 8 lignes)
                 valid_cols = []
                 for col in numeric_cols:
                     ref_std = ref_data[col].std()
@@ -58,7 +58,7 @@ def compute_drift_metrics(reference_csv="data/training_data.csv"):
                         ref_n > 5 and cur_n >= 1):  # ≥1 pour production
                         valid_cols.append(col)
                 
-                print(f"✅ {len(valid_cols)}/{len(numeric_cols)} colonnes drift OK")
+                print(f" {len(valid_cols)}/{len(numeric_cols)} colonnes drift OK")
                 
                 if valid_cols:
                     # 6. CALCUL DRIFT (KS-test robuste)
@@ -79,12 +79,12 @@ def compute_drift_metrics(reference_csv="data/training_data.csv"):
                                 pass  # Ignore erreurs rares
                     
                     drift_score = drift_count / len(valid_cols)
-                    print(f"🎯 Drift: {drift_count}/{len(valid_cols)} ({drift_score:.1%})")
+                    print(f" Drift: {drift_count}/{len(valid_cols)} ({drift_score:.1%})")
             
             else:
-                print("⚠️ Aucune colonne numérique commune")
+                print(" Aucune colonne numérique commune")
 
-        # 7. Métriques opérationnelles
+        # Métriques opérationnelles
         error_count = db.query(APILogs).filter(APILogs.status_code >= 400).count()
         logs = db.query(APILogs).all()
         latencies = []
@@ -107,11 +107,11 @@ def compute_drift_metrics(reference_csv="data/training_data.csv"):
         # b.add(metric_entry)
         # db.commit()
         
-        print(f"✅ TERMINÉ | Drift: {drift_score:.1%} | Erreurs: {error_count} | Latence: {avg_latency:.0f}ms")
+        print(f" TERMINÉ | Drift: {drift_score:.1%} | Erreurs: {error_count} | Latence: {avg_latency:.0f}ms")
         
     except Exception as e:
-        print(f"❌ ERREUR: {e}")
-        print(f"  → Type: {type(e).__name__}")
+        print(f" ERREUR: {e}")
+        print(f"  Type: {type(e).__name__}")
         db.rollback()
         drift_score = 0.0
     finally:
