@@ -15,17 +15,18 @@ def test_predict_valid():
 
 def test_predict_missing_column():
     # Supprime volontairement une feature
-    invalid_dict = valid_data.model_dump()
-    invalid_dict.pop("AMT_INSTALMENT_max")
+    invalid_data = valid_data.model_dump()
+    del invalid_data["AMT_INSTALMENT_max"]
+    
     # Pydantic ne permet plus de créer l'objet → test via HTTP endpoint
-    response = client.post("/predict", json=invalid_dict)
+    response = client.post("/predict", json=invalid_data)
     assert response.status_code == 422
     assert any("Feature manquante" in msg for msg in response.json()["detail"])
     
 def test_predict_wrong_type():
-    invalid_dict = valid_data.model_dump()
-    invalid_dict["AMT_INSTALMENT_max"] = "cinquante"
-    response = client.post("/predict", json=invalid_dict)
+    invalid_data = valid_data.model_dump()
+    invalid_data["AMT_INSTALMENT_max"] = "cinquante"
+    response = client.post("/predict", json=invalid_data)
     assert response.status_code == 422
     assert any("Input should be a valid integer" in msg for msg in response.json()["detail"])
 
