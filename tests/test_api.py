@@ -29,6 +29,8 @@ def test_predict_wrong_type():
     json_resp = response.json()
     # Vérifie le message Pydantic plutôt que "Type incorrect"
     assert any(
-    "AMT_INSTALMENT_max" in err["loc"] and "integer" in err["msg"]
+    isinstance(err, dict) and 
+    "AMT_INSTALMENT_max" in str(err.get("loc", "")) and 
+    "integer" in str(err.get("msg", ""))
     for err in json_resp["detail"]
     )
