@@ -228,7 +228,7 @@ Réponse :
 
 ```json
 {
-  "prediction": 0.85
+  "prediction": 1
 }
 ```
 
