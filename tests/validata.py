@@ -1,5 +1,5 @@
 # Données valides
-valid_data = InputData{
+valid_data = InputData(
   "CNT_CHILDREN": 0,
   "AMT_INCOME_TOTAL": 0,
   "AMT_CREDIT": 1000,
@@ -212,4 +212,4 @@ valid_data = InputData{
   "FLAG_OWN_CAR_N": 0,
   "FLAG_OWN_REALTY_N": 0,
   "EMERGENCYSTATE_MODE_Unknown": 0
-}
+)
