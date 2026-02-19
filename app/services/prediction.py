@@ -99,7 +99,7 @@ def predict(data: InputData | dict) -> float:
         X = pd.DataFrame([X_row], columns=columns)
         #pred_value = float(model.predict(X)[0])
         raw_pred = model.predict(X)[0]
-        # Convertir numpy → python natif
+        # Convertir numpy => python natif
         if isinstance(raw_pred, (np.integer, np.floating)):
             raw_pred = raw_pred.item()
         #pred_value = float(np.expm1(raw_pred))
