@@ -1,5 +1,5 @@
 # Données valides
-valid_data = {
+valid_data = InputData{
   "CNT_CHILDREN": 0,
   "AMT_INCOME_TOTAL": 0,
   "AMT_CREDIT": 1000,
