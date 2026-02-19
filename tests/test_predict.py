@@ -28,6 +28,7 @@ def test_predict_wrong_type():
     invalid_data["AMT_INSTALMENT_max"] = "cinquante"
     response = client.post("/predict", json=invalid_data)
     assert response.status_code == 422
+    json_resp = response.json()
     assert any(
         "AMT_INSTALMENT_max" in msg and "valid number" in msg
         for msg in json_resp["detail"]
