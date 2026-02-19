@@ -10,7 +10,7 @@ from tests.validata import valid_data
 # Cas 1: prédiction normale
 # ----------------------
 def test_predict_valid():
-    result = prediction.predict(valid_data)
+    result = prediction.predict(valid_data.model_dump())
     assert isinstance(result, float)
 
 # ----------------------
@@ -18,7 +18,7 @@ def test_predict_valid():
 # ----------------------
 def test_predict_fallback(monkeypatch):
     monkeypatch.setattr(prediction, "model", None)
-    result = prediction.predict(valid_data)
+    result = prediction.predict(valid_data.model_dump())
     assert result == 42
 
 # ----------------------
@@ -28,6 +28,6 @@ def test_missing_feature(monkeypatch):
     # Remplace les colonnes pour forcer un KeyError
     monkeypatch.setattr(prediction, "columns", list(valid_data.model_dump().keys()) + ["fake_column"])
     with pytest.raises(HTTPException) as exc:
-        prediction.predict(valid_data)
+        prediction.predict(valid_data.model_dump())
     assert exc.value.status_code == 422
     assert "Feature manquante" in exc.value.detail
