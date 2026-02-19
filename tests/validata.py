@@ -1,4 +1,6 @@
 # Données valides
+from app.model.data import InputData
+
 valid_data = InputData(
   "CNT_CHILDREN": 0,
   "AMT_INCOME_TOTAL": 0,
