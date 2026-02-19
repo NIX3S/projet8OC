@@ -152,3 +152,4 @@ if st.button("Lancer Profiling"):
         st.dataframe(df_top20, height=400)
     else:
         st.warning("Impossible de récupérer le TOP 20. Vérifie que profile_model.py s'est bien exécuté.")
+        
