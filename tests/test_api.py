@@ -28,4 +28,7 @@ def test_predict_wrong_type():
     assert response.status_code == 422
     json_resp = response.json()
     # Vérifie le message Pydantic plutôt que "Type incorrect"
-    assert any("Input should be a valid integer" in msg for msg in json_resp["detail"])
+    assert any(
+    "AMT_INSTALMENT_max" in err["loc"] and "integer" in err["msg"]
+    for err in json_resp["detail"]
+    )
