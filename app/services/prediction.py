@@ -55,9 +55,12 @@ except FileNotFoundError:
 # ----------------------------
 # PREDICT + ENREGISTREMENT BDD
 # ----------------------------
-def predict(data: InputData) -> float:
+def predict(data: InputData | dict) -> float:
     #session = SessionLocal()
-    data_dict = data.model_dump()
+    if isinstance(data, InputData):
+        data_dict = data.model_dump()
+    else:
+        data_dict = data
 
     # Insert input dans BDD
     input_row = MLInput(**data_dict)
