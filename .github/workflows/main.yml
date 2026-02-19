@@ -75,3 +75,7 @@ jobs:
           PYTHONPATH: ${{ github.workspace }}
         run: |
           pytest --cov=app tests/
+      # Étape pour construire l'image Docker
+      - name: Build Docker image
+        run: |
+          docker build -t my-api-image:${{ github.sha }} .
