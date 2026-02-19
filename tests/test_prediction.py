@@ -1,4 +1,3 @@
-# tests/test_prediction.py
 import pytest
 from fastapi import HTTPException
 from app.services import prediction
