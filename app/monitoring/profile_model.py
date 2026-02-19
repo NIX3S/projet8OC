@@ -81,4 +81,3 @@ print(f"CPU utilisé : {cpu_usage:.2f} %")
 print("\n--- TOP 20 fonctions les plus coûteuses ---\n")
 print(df_top20)
 
-# On peut aussi retourner le DataFrame pour l'utiliser dans Streamlit
