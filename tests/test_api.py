@@ -7,14 +7,14 @@ client = TestClient(app)
 
 
 def test_predict_valid():
-    response = client.post("/predict", json=valid_data)
+    response = client.post("/predict", json=valid_data.model_dump())
     assert response.status_code == 200
     json_resp = response.json()
     assert "prediction" in json_resp
     assert isinstance(json_resp["prediction"], float)
 
 def test_predict_missing_column():
-    invalid_data = valid_data.copy()
+    invalid_data = valid_data.model_dump()
     del invalid_data["AMT_INSTALMENT_max"]  # Supprime une colonne
     response = client.post("/predict", json=invalid_data)
     assert response.status_code == 422
@@ -22,7 +22,7 @@ def test_predict_missing_column():
     assert any("Feature manquante" in msg for msg in json_resp["detail"])
 
 def test_predict_wrong_type():
-    invalid_data = valid_data.copy()
+    invalid_data = valid_data.model_dump()
     invalid_data["AMT_INSTALMENT_max"] = "cinquante"
     response = client.post("/predict", json=invalid_data)
     assert response.status_code == 422
