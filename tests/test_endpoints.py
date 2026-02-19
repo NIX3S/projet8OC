@@ -52,4 +52,4 @@ def test_predict_internal_error(monkeypatch):
     response = client.post("/predict", json=valid_data.model_dump())
     assert response.status_code == 500
     json_resp = response.json()
-    assert json_resp["detail"] == "Erreur interne du serveur"
+    assert json_resp["detail"] == "Erreur interne"
