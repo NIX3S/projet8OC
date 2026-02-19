@@ -18,7 +18,7 @@ def test_predict_valid():
 # ----------------------
 def test_predict_fallback(monkeypatch):
     monkeypatch.setattr(prediction, "model", None)
-    result = prediction.predict(valid_data.model_dump())
+    result = prediction.predict(valid_data)
     assert result == 42
 
 # ----------------------
