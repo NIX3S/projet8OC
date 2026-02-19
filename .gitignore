@@ -3,3 +3,7 @@ __pycache__/
 .env
 *.pkl
 data/
+old/
+.venv/
+save/
+models/
