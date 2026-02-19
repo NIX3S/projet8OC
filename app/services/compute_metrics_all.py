@@ -1,49 +1,32 @@
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-from datetime import datetime
+from sqlalchemy.orm import Session
+from datetime import datetime, timezone as UTC
+import sys
+import os
 
-from create_db import DATABASE_URL, MLMetrics
+# Ajouter la racine du projet au PYTHONPATH
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+sys.path.append(project_root)
+from create_db import MLMetrics
 from app.services.monitoring import compute_monitoring_metrics
 from app.services.drift_metrics import compute_drift_metrics
 from app.services.anomalies import compute_anomalies
-from datetime import datetime, UTC
 
+def update_all_metrics(db: Session):
+    """
+    Calcule les métriques opérationnelles, drift, anomalies et insère une ligne dans MLMetrics.
+    """
+    error_count, avg_latency = compute_monitoring_metrics(db)
+    drift_score = compute_drift_metrics()
+    anomaly_count = compute_anomalies(db)
 
-# Setup DB
-engine = create_engine(DATABASE_URL)
-SessionLocal = sessionmaker(bind=engine)
+    metric_entry = MLMetrics(
+        timestamp=datetime.now(UTC.utc),
+        error_count=error_count,
+        avg_latency=avg_latency,
+        drift_score=drift_score,
+        anomaly_count=anomaly_count
+    )
 
-if __name__ == "__main__":
-
-    db = SessionLocal()
-
-    try:
-        print("=== Calcul des métriques opérationnelles ===")
-        error_count, avg_latency = compute_monitoring_metrics(db)
-
-        print("=== Calcul du drift ===")
-        drift_score = compute_drift_metrics()
-
-        print("=== Détection anomalies ===")
-        anomaly_count = compute_anomalies(db)
-
-        # ✅ UNE SEULE INSERTION
-        metric_entry = MLMetrics(
-            timestamp=datetime.now(UTC),
-            error_count=error_count,
-            avg_latency=avg_latency,
-            anomaly_count=anomaly_count,
-            drift_score=drift_score
-        )
-
-        db.add(metric_entry)
-        db.commit()
-
-        print("\n✅ Toutes les métriques ont été sauvegardées proprement.")
-
-    except Exception as e:
-        db.rollback()
-        print(f"❌ ERREUR GLOBALE: {e}")
-
-    finally:
-        db.close()
+    db.add(metric_entry)
+    db.commit()
+    return metric_entry
