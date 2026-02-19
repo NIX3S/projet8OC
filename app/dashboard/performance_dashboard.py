@@ -117,20 +117,6 @@ if not logs_filtered.empty:
 else:
     st.warning("Aucune donnée disponible pour la période sélectionnée")
 
-import streamlit as st
-import subprocess
-import pandas as pd
-import re
-import os 
-import tempfile
-# Chemin absolu vers profile_model.py
-#profile_dir = os.path.abspath("app/monitoring")
-#csv_file = os.path.join(profile_dir, "profiling_top20.csv")
-# Chemin absolu basé sur l'emplacement du dashboard
-dashboard_dir = os.path.dirname(os.path.abspath(__file__))
-profile_dir = os.path.join(dashboard_dir, "..", "monitoring")
-profile_dir = os.path.abspath(profile_dir)
-csv_file = os.path.join(profile_dir, "profiling_top20.csv")
 
 import streamlit as st
 import subprocess
@@ -138,9 +124,7 @@ import pandas as pd
 import re
 import os 
 import tempfile
-# Chemin absolu vers profile_model.py
-#profile_dir = os.path.abspath("app/monitoring")
-#csv_file = os.path.join(profile_dir, "profiling_top20.csv")
+
 # Chemin absolu basé sur l'emplacement du dashboard
 dashboard_dir = os.path.dirname(os.path.abspath(__file__))
 profile_dir = os.path.join(dashboard_dir, "..", "monitoring")
@@ -156,12 +140,12 @@ if st.button("Lancer Profiling"):
         capture_output=True,
         text=True
     )
-    st.subheader("Sortie brute du profiling")
-    st.text(result.stdout)
-    st.subheader("Sortie stderr")
-    st.text(result.stderr)
-    st.write(f"Chemin CSV attendu : {csv_file}")
-    st.write(f"Existe ? : {os.path.exists(csv_file)}")
+    #st.subheader("Sortie brute du profiling")
+    #st.text(result.stdout)
+    #st.subheader("Sortie stderr")
+    #st.text(result.stderr)
+    #st.write(f"Chemin CSV attendu : {csv_file}")
+    #st.write(f"Existe ? : {os.path.exists(csv_file)}")
 
     if os.path.exists(csv_file):
         df_top20 = pd.read_csv(csv_file)
