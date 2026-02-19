@@ -27,7 +27,6 @@ def test_predict_wrong_type():
     response = client.post("/predict", json=invalid_data)
     assert response.status_code == 422
     json_resp = response.json()
-    # Vérifie le message Pydantic plutôt que "Type incorrect"
     print(json_resp)
     assert any(
         "AMT_INSTALMENT_max" in msg and "valid number" in msg
