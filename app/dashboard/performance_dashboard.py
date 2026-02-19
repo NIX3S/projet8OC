@@ -35,11 +35,11 @@ logs_df = load_logs()
 # Sidebar: filtre temporel
 # ---------------------------
 st.sidebar.title("Filtres")
-max_date = logs_df['timestamp'].max() if not logs_df.empty else datetime.now()
+max_date = logs_df['timestamp'].max() if not logs_df.empty else datetime.now()+ timedelta(days=1)
 min_date = logs_df['timestamp'].min() if not logs_df.empty else datetime.now() - timedelta(days=1)
 
 start_date = st.sidebar.date_input("Date de début", min_date)
-end_date = st.sidebar.date_input("Date de fin", max_date)
+end_date = st.sidebar.date_input("Date de fin", max_date)+ timedelta(days=1)
 
 # Filtrer les données
 logs_filtered = logs_df[(logs_df['timestamp'] >= pd.to_datetime(start_date)) & 
@@ -132,6 +132,21 @@ profile_dir = os.path.join(dashboard_dir, "..", "monitoring")
 profile_dir = os.path.abspath(profile_dir)
 csv_file = os.path.join(profile_dir, "profiling_top20.csv")
 
+import streamlit as st
+import subprocess
+import pandas as pd
+import re
+import os 
+import tempfile
+# Chemin absolu vers profile_model.py
+#profile_dir = os.path.abspath("app/monitoring")
+#csv_file = os.path.join(profile_dir, "profiling_top20.csv")
+# Chemin absolu basé sur l'emplacement du dashboard
+dashboard_dir = os.path.dirname(os.path.abspath(__file__))
+profile_dir = os.path.join(dashboard_dir, "..", "monitoring")
+profile_dir = os.path.abspath(profile_dir)
+csv_file = os.path.join(profile_dir, "profiling_top20.csv")
+
 
 if st.button("Lancer Profiling"):
     import subprocess
@@ -143,6 +158,8 @@ if st.button("Lancer Profiling"):
     )
     st.subheader("Sortie brute du profiling")
     st.text(result.stdout)
+    st.subheader("Sortie stderr")
+    st.text(result.stderr)
     st.write(f"Chemin CSV attendu : {csv_file}")
     st.write(f"Existe ? : {os.path.exists(csv_file)}")
 
@@ -152,4 +169,5 @@ if st.button("Lancer Profiling"):
         st.dataframe(df_top20, height=400)
     else:
         st.warning("Impossible de récupérer le TOP 20. Vérifie que profile_model.py s'est bien exécuté.")
+
         
