@@ -3,7 +3,7 @@ import pytest
 from fastapi import HTTPException
 from app.services import prediction
 from app.api.endpoints import InputData
-from tests.test_api import valid_data
+from tests.validata import valid_data
 
 
 # ----------------------
