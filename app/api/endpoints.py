@@ -68,7 +68,9 @@ def make_prediction(data: InputData, request: Request):
     status_code = 200
     error_message = None
     inference_time_ms = None
-
+    total_latency_ms = None
+    inference_time_ms = None
+    cpu_usage = None
     try:
         total_start = time.time()
 
