@@ -1,4 +1,3 @@
-# dashboard_api.py
 import streamlit as st
 import pandas as pd
 import requests
@@ -6,7 +5,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from datetime import datetime, timedelta
 
-API_URL = "http://localhost:8000/monitoring"  # changer selon ton API
+API_URL = "http://localhost:8000/monitoring" 
 
 # ---------------------------
 # Sidebar: filtre temporel
