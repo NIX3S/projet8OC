@@ -1,4 +1,3 @@
-# create_db.py
 from sqlalchemy import create_engine, Column, Integer, Float, DateTime,String, ForeignKey, text
 from sqlalchemy.orm import declarative_base, relationship
 from datetime import datetime
@@ -275,8 +274,8 @@ class APILogs(Base):
     latency_ms  = Column(Float)
     status_code   = Column(Integer)
     error_message   = Column(String)
-    inference_time_ms = Column(Float)   # NOUVEAU
-    cpu_usage = Column(Float)           # NOUVEAU
+    inference_time_ms = Column(Float)
+    cpu_usage = Column(Float)
     
 
 class MLMetrics (Base):
