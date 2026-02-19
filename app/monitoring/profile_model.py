@@ -6,6 +6,12 @@ import pstats
 import psutil
 import mlflow.sklearn
 import pandas as pd
+import sys
+import os
+
+# Ajouter la racine du projet au PYTHONPATH
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+sys.path.append(project_root)
 from tests.validata import valid_data
 from app.model.data import InputData
 from app.services.prediction import predict
@@ -13,7 +19,7 @@ from app.services.prediction import predict
 # ============================
 # PROFILING
 # ============================
-validate_data = InputData(**valid_data)
+validate_data = valid_data
 process = psutil.Process()
 process.cpu_percent(interval=None)
 
