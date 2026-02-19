@@ -10,7 +10,7 @@ from app.model.data import InputData
 from app.services.prediction import predict
 from fastapi import APIRouter, HTTPException, Request
 from sqlalchemy.orm import Session
-from create_db import DATABASE_URL, APILogs  # si APILogs est dans create_db.py
+from create_db import DATABASE_URL, APILogs 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from app.services.compute_monitoring_metrics import compute_metrics
@@ -28,13 +28,6 @@ class OutputData(BaseModel):
 
 # --- Enregistrement du temps de démarrage ---
 START_TIME = time.time()
-
-# --- Charger le modèle champion une seule fois ---
-#MODEL_PATH = "models/champion_model"
-#if not os.path.exists(MODEL_PATH):
-#    raise Exception(f"Modèle introuvable à {MODEL_PATH}. Exporter le modèle avant de lancer l'API.")
-#
-#model = mlflow.sklearn.load_model(MODEL_PATH)
 
 
 # -----------------------------
