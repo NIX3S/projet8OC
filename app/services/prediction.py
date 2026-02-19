@@ -106,4 +106,4 @@ def predict(data: InputData) -> float:
     session.add(output_row)
     session.commit()
 
-    return raw_pred
+    return float(raw_pred)
