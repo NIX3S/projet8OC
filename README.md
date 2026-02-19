@@ -56,14 +56,32 @@ Fonctionnalités clés :
 │   ├── api/
 │   │   └── endpoints.py
 │   ├── model/
-│   │   └── credit_model.joblib
+│   │   └── xgb_model.joblib
+│   │   └── data.py
+│   │   └── databdd.py
+│   │   └── model.joblib
+│   │   └── xgb_model.json
+│   │   └── preprocessor.onnx
+│   │   └── xgb_model.joblib
 │   └── services/
-│       └── prediction.py
+│   │   └── prediction.py
+│   │   └── panomalies.py
+│   │   └── compute_metrics_all.py
+│   │   └── compute_monitoring_metrics.py
+│   │   └── drift_metrics.py
+│   │   └── monitoring.py
+│   │   └── old
+│   │   │   └── nouveau
+│   │   │   │   └── prediction.py
+│   └── monitoring/
+│   │   └── profile_model.py
 ├── tests/
 │   ├── test_api.py
 │   ├── test_endpoints.py
 │   ├── test_predict.py
 │   └── test_prediction.py
+├── data/
+│   ├── training_data.csv
 ├── requirements.txt
 ├── Dockerfile
 ├── docker-compose.yml
@@ -77,7 +95,7 @@ Le modèle est stocké localement dans :
 
 ```
 
-app/model/credit_model.joblib
+app/model/xgb_model.joblib
 
 ````
 
@@ -131,8 +149,8 @@ python -m pip install --upgrade pip
 1. Cloner le repository
 
 ```bash
-git clone <URL_DU_DEPOT>
-cd <NOM_DU_PROJET>
+git clone https://github.com/NIX3S/projet8OC
+cd projet8OC
 ```
 
 2. Installer les dépendances (optionnel si Docker)
@@ -164,8 +182,11 @@ API disponible sur : `http://127.0.0.1:8000`
 Créer un fichier `.env` à la racine du projet (exemple) :
 
 ```env
-MODEL_PATH=app/model/credit_model.joblib
-PORT=8000
+DB_USER=postgres
+DB_PASSWORD=5345
+DB_HOST=db
+DB_PORT=5432
+DB_NAME=scoring_ml
 ```
 
 ---
@@ -199,6 +220,7 @@ Exemple :
   "CNT_CHILDREN": 2,
   "DAYS_BIRTH": -10000,
   "AMT_INSTALMENT_max": 2000
+[...]
 }
 ```
 
@@ -272,8 +294,8 @@ Distribué sous licence MIT.
 ## Contact
 
 Ton Nom
-GitHub: [https://github.com/tonusername](https://github.com/tonusername)
-Project Link: [https://github.com/tonusername/nom_projet](https://github.com/tonusername/nom_projet)
+GitHub: [https://github.com/NIX3S](https://github.com/NIX3S)
+Project Link: [https://github.com/NIX3S/projet8OC](https://github.com/NIX3S/projet8OC)
 
 ```
 
