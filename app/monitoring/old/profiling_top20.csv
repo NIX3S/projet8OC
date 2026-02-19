@@ -1,0 +1,21 @@
+Fichier;Ligne;Fonction;Appels (ncalls);Appels primaires (nprimcalls);Temps total (s);Temps cumulé (s)
+/mnt/c/users/lesag/desktop/projets/projet8/app/services/prediction.py;106;predict;1;1;5,68E-05;0.164062424
+/mnt/c/users/lesag/desktop/projets/projet8/.venv/lib/python3.12/site-packages/xgboost/core.py;732;inner_f;2;3;3,79E-05;0.087795539
+/mnt/c/users/lesag/desktop/projets/projet8/.venv/lib/python3.12/site-packages/xgboost/core.py;835;__init__;1;1;2,52E-05;0.047385458000000005
+/mnt/c/users/lesag/desktop/projets/projet8/.venv/lib/python3.12/site-packages/xgboost/data.py;1308;dispatch_data_backend;1;1;2,11E-05;0.047315061000000005
+/mnt/c/users/lesag/desktop/projets/projet8/.venv/lib/python3.12/site-packages/xgboost/data.py;275;_from_numpy_array;1;1;0,046984404;0.047078753
+/mnt/c/users/lesag/desktop/projets/projet8/app/services/prediction.py;67;preprocess_onnx;1;1;3,33E-05;0.044644934000000004
+/mnt/c/users/lesag/desktop/projets/projet8/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py;1375;execute;3;3;1,12E-05;0.041779035000000006
+/mnt/c/users/lesag/desktop/projets/projet8/.venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py;518;_execute_on_connection;3;3;6,36E-06;0.041767843000000006
+/mnt/c/users/lesag/desktop/projets/projet8/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py;1591;_execute_clauseelement;3;3;3,66E-05;0.041761479000000004
+/mnt/c/users/lesag/desktop/projets/projet8/.venv/lib/python3.12/site-packages/xgboost/core.py;2591;predict;1;1;0,036372864;0.040383727
+/mnt/c/users/lesag/desktop/projets/projet8/.venv/lib/python3.12/site-packages/sqlalchemy/orm/state_changes.py;93;_go;3;27;7,35E-05;0.030245694000000004
+/mnt/c/users/lesag/desktop/projets/projet8/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py;1994;commit;2;2;3,37E-06;0.030168618
+<string>;1;commit;2;4;7,14E-06;0.03016525
+/mnt/c/users/lesag/desktop/projets/projet8/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py;1304;commit;2;4;5,99E-05;0.030151864
+/mnt/c/users/lesag/desktop/projets/projet8/.venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py;680;_compile_w_cache;3;3;2,99E-05;0.029157424
+/mnt/c/users/lesag/desktop/projets/projet8/.venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py;318;_compiler;3;3;1,34E-05;0.027811762
+/mnt/c/users/lesag/desktop/projets/projet8/.venv/lib/python3.12/site-packages/sqlalchemy/sql/compiler.py;1359;__init__;3;3;2,87E-05;0.027798341
+/mnt/c/users/lesag/desktop/projets/projet8/.venv/lib/python3.12/site-packages/sqlalchemy/sql/compiler.py;845;__init__;3;3;1,91E-05;0.027767379000000002
+/mnt/c/users/lesag/desktop/projets/projet8/.venv/lib/python3.12/site-packages/sqlalchemy/sql/compiler.py;933;process;3;3;4,98E-06;0.027746574000000003
+/mnt/c/users/lesag/desktop/projets/projet8/.venv/lib/python3.12/site-packages/sqlalchemy/sql/visitors.py;126;_compiler_dispatch;3;653;0,000655504;0.027741591000000003
