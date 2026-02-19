@@ -14,6 +14,7 @@ from create_db import DATABASE_URL, APILogs  # si APILogs est dans create_db.py
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from app.services.compute_monitoring_metrics import compute_metrics
+from app.services.compute_metrics_all import update_all_metrics
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(bind=engine)
 
@@ -103,6 +104,9 @@ def make_prediction(data: InputData, request: Request):
         )
         db.add(log_entry)
         db.commit()
+        # --- Mettre à jour les métriques dans MLMetrics ---
+        metric_entry = update_all_metrics(db)
+        print(f"Métriques mises à jour : {metric_entry}")
         db.close()
 
     return {"prediction": result}
