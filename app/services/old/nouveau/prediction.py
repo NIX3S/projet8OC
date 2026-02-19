@@ -47,15 +47,15 @@ try:
     # Charger preprocessor ONNX pour récupérer les noms des colonnes
     preproc_session = ort.InferenceSession(PREPROC_PATH)
     columns = [inp.name for inp in preproc_session.get_inputs()]
-    print(f"✅ Colonnes chargées depuis preprocessor.onnx: {len(columns)}")
+    print(f" Colonnes chargées depuis preprocessor.onnx: {len(columns)}")
     
     # Charger XGBoost natif
     xgb_model = xgb.Booster()
     xgb_model.load_model(XGB_PATH)
-    print("✅ xgb_model.json chargé")
+    print(" xgb_model.json chargé")
     
 except FileNotFoundError as e:
-    print(f"❌ Modèles non trouvés: {e}")
+    print(f" Modèles non trouvés: {e}")
     print("Utilisez un modèle fictif pour tester.")
     preproc_session = None
     xgb_model = None
@@ -116,14 +116,14 @@ def predict(data: InputData) -> float:
         raw_pred = 42
     else:
         try:
-            # 1️⃣ PREPROCESSING ONNX
+            #PREPROCESSING ONNX
             X_processed = preprocess_onnx(data_dict, columns)
             
-            # 2️⃣ Prédiction XGBoost natif
+            #Prédiction XGBoost natif
             dmatrix = xgb.DMatrix(X_processed)
             raw_pred = xgb_model.predict(dmatrix)[0]
             
-            # Convertir numpy → python natif
+            #Convertir numpy → python natif
             if isinstance(raw_pred, (np.integer, np.floating)):
                 raw_pred = raw_pred.item()
                 
