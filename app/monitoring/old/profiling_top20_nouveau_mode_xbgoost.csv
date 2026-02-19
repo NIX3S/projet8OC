@@ -1,0 +1,21 @@
+Fichier;Ligne;Fonction;Appels (ncalls);Appels primaires (nprimcalls);Temps total (s);Temps cumulé (s)
+/mnt/c/users/lesag/desktop/projets/projet8/app/monitoring/profile_model.py;20;run_prediction;1;1;8,46E-05;0.200382901
+/mnt/c/users/lesag/desktop/projets/projet8/app/services/prediction.py;58;predict;1;1;0,000521868;0.20029207000000002
+/mnt/c/users/lesag/desktop/projets/projet8/.venv/lib/python3.12/site-packages/sqlalchemy/orm/state_changes.py;93;_go;3;27;7,36E-05;0.10613850200000001
+/mnt/c/users/lesag/desktop/projets/projet8/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py;1994;commit;2;2;3,27E-06;0.106061161
+<string>;1;commit;2;4;7,36E-06;0.10605789600000001
+/mnt/c/users/lesag/desktop/projets/projet8/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py;1304;commit;2;4;7,95E-05;0.10604508
+/mnt/c/users/lesag/desktop/projets/projet8/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py;1375;execute;3;3;9,48E-06;0.104957901
+/mnt/c/users/lesag/desktop/projets/projet8/.venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py;518;_execute_on_connection;3;3;6,48E-06;0.104948418
+/mnt/c/users/lesag/desktop/projets/projet8/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py;1591;_execute_clauseelement;3;3;3,78E-05;0.104941935
+<string>;1;_prepare_impl;2;4;4,33E-06;0.09473817300000001
+/mnt/c/users/lesag/desktop/projets/projet8/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py;1269;_prepare_impl;2;4;1,54E-05;0.094731564
+/mnt/c/users/lesag/desktop/projets/projet8/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py;4301;flush;3;3;1,97E-05;0.09471224800000001
+/mnt/c/users/lesag/desktop/projets/projet8/.venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py;4350;_flush;2;2;4,91E-05;0.09468928800000001
+/mnt/c/users/lesag/desktop/projets/projet8/.venv/lib/python3.12/site-packages/sqlalchemy/orm/unitofwork.py;441;execute;2;2;1,51E-05;0.09428013900000001
+/mnt/c/users/lesag/desktop/projets/projet8/.venv/lib/python3.12/site-packages/sqlalchemy/orm/unitofwork.py;640;execute;2;2;7,70E-06;0.093724793
+/mnt/c/users/lesag/desktop/projets/projet8/.venv/lib/python3.12/site-packages/sqlalchemy/orm/persistence.py;40;save_obj;2;2;6,19E-05;0.093717091
+/mnt/c/users/lesag/desktop/projets/projet8/.venv/lib/python3.12/site-packages/sqlalchemy/orm/persistence.py;962;_emit_insert_statements;2;2;5,84E-05;0.09319392700000001
+/mnt/c/users/lesag/desktop/projets/projet8/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py;1791;_execute_context;3;3;2,58E-05;0.086790396
+/mnt/c/users/lesag/desktop/projets/projet8/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py;1850;_exec_single_context;3;3;4,31E-05;0.086189231
+/mnt/c/users/lesag/desktop/projets/projet8/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py;951;do_execute;3;3;5,21E-06;0.08519238500000001
